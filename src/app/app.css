@@ -1,0 +1,19 @@
+.container {
+  padding: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.up {
+  color: green;
+  font-weight: bold;
+}
+
+.down {
+  color: red;
+  font-weight: bold;
+}
+
+.checking {
+  color: orange;
+  font-weight: bold;
+}
