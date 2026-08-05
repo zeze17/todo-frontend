@@ -1,19 +1,117 @@
 .container {
   padding: 2rem;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
-.up {
+.result-text.up {
   color: green;
   font-weight: bold;
 }
 
-.down {
+.result-text.down {
   color: red;
   font-weight: bold;
 }
 
-.checking {
-  color: orange;
+.result-text.checking {
+  color: darkorange;
   font-weight: bold;
+}
+
+.meta {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+}
+
+/* --- Pokebola --- */
+
+.pokeball-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+  margin: 1.5rem 0;
+}
+
+.pokeball {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid #1a1a1a;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pokeball-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #ee1515;
+}
+
+.pokeball-band {
+  position: absolute;
+  top: calc(50% - 5px);
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: #1a1a1a;
+  z-index: 2;
+}
+
+.pokeball-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  background: #ffffff;
+  border: 4px solid #1a1a1a;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+/* Cargando: se tambalea sin parar, como cuando esta a punto de capturar */
+.pokeball-wrapper.checking .pokeball {
+  animation: shake 0.6s ease-in-out infinite;
+}
+
+/* Exito: sacude 3 veces (como una captura real) y termina con brillo dorado */
+.pokeball-wrapper.success .pokeball {
+  animation:
+    shake 0.5s ease-in-out 3,
+    glow-success 1s ease-in 1.5s forwards;
+}
+
+/* Fallo: sacude 2 veces y se rinde con brillo rojo */
+.pokeball-wrapper.fail .pokeball {
+  animation:
+    shake 0.5s ease-in-out 2,
+    glow-fail 1s ease-in 1s forwards;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-25deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(25deg); }
+}
+
+@keyframes glow-success {
+  0% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(255, 215, 0, 0.7); }
+  100% { box-shadow: 0 0 10px 3px rgba(255, 215, 0, 0.45); }
+}
+
+@keyframes glow-fail {
+  0% { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(220, 38, 38, 0.7); }
+  100% { box-shadow: 0 0 10px 3px rgba(220, 38, 38, 0.45); }
 }

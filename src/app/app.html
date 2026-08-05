@@ -1,13 +1,34 @@
 <main class="container">
   <h1>{{ title() }}</h1>
-
   <h2>Estado del backend</h2>
 
+  <div
+    class="pokeball-wrapper"
+    [class.checking]="status() === 'checking'"
+    [class.success]="status() === 'UP'"
+    [class.fail]="status() === 'DOWN'"
+  >
+    <div class="pokeball">
+      <div class="pokeball-top"></div>
+      <div class="pokeball-band"></div>
+      <div class="pokeball-button"></div>
+    </div>
+  </div>
+
   <p
+    class="result-text"
     [class.up]="status() === 'UP'"
     [class.down]="status() === 'DOWN'"
     [class.checking]="status() === 'checking'"
   >
-    {{ status() }}
+    @switch (status()) {
+      @case ('checking') { Lanzando la Pokébola... }
+      @case ('UP') { ¡Capturado! Servidor UP }
+      @case ('DOWN') { Se escapó... Servidor DOWN }
+    }
   </p>
+
+  @if (healthData(); as data) {
+    <p class="meta">{{ data.service }} · v{{ data.version }}</p>
+  }
 </main>
